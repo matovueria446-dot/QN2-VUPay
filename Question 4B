@@ -1,0 +1,75 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ */
+
+package ura.funclist;
+
+/**
+ *
+ * @author ADMIN
+ */
+
+ 
+public final class FuncList {
+
+    
+    private static final class Element {
+        private final int item;
+        private final Element next;
+
+        private Element(int item, Element next) {
+            this.item = item;
+            this.next = next;
+        }
+    }
+    
+
+    private final Element headElement;
+
+        public FuncList() {
+        this.headElement = null;
+    }
+
+        private FuncList(Element e) {
+        this.headElement = e;
+    }
+
+        public int head() {
+        if (headElement == null) {
+            throw new RuntimeException("Empty list: hd undefined");
+        }
+        return headElement.item;
+    }
+
+    
+    public FuncList tail() {
+        if (headElement == null) {
+            throw new RuntimeException("Empty list: tl undefined");
+        }
+        
+        return new FuncList(headElement.next);
+    }
+
+        public FuncList cons(int val) {
+        
+        Element newEl = new Element(val, this.headElement);
+       
+        return new FuncList(newEl);
+    }B
+
+        public static void main(String[] args) {
+        FuncList list = new FuncList();
+        
+        
+        list = list.cons(10).cons(20).cons(30);
+
+        System.out.println("Head: " + list.head());               
+        System.out.println("Tail's Head: " + list.tail().head()); 
+        
+        
+        
+        FuncList newList = list.cons(40);
+        System.out.println("Original Head: " + list.head());    
+        System.out.println("New List Head: " + newList.head()); 
+    }
+}
